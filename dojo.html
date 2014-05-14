@@ -10,7 +10,7 @@
 <body class="claro">
   <script>
     require(["dojo/parser", "dijit/form/DateTextBox"]);
-    require(["dijit/form/DateTextBox", "dojo/ready"], function(Button, ready){
+    require(["dijit/form/DateTextBox", "dojo/ready"], function(DateTextBox, ready){
       ready(function(){
         dijit.byId('datebox').rangeCheck = function(date, constraints) {
           var month = date.getMonth() + 1; // offset by 1 since this is 0 based
