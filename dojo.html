@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>dojo exercise</title>
+  <link rel="stylesheet" href="dijit/themes/claro/claro.css">
+  <script>dojoConfig = {parseOnLoad: true}</script>
+  <script src="dojo/dojo.js"></script>
+</head>
+<body class="claro">
+  <script>
+    require(["dojo/parser", "dijit/form/DateTextBox"]);
+    require(["dijit/form/DateTextBox", "dojo/ready"], function(Button, ready){
+      ready(function(){
+        dijit.byId('datebox').rangeCheck = function(date, constraints) {
+          var month = date.getMonth() + 1; // offset by 1 since this is 0 based
+          var dayOfWeek = date.getDay();
+          var dayOfMonth = date.getDate();
+
+          // US holidays (2014)
+          if ((month == 1) && (dayOfMonth == 1)) return false;   // New Years day
+          if ((month == 1) && (dayOfMonth == 20)) return false;  // MLK bday
+          if ((month == 2) && (dayOfMonth == 17)) return false;  // Washington's bday
+          if ((month == 5) && (dayOfMonth == 26)) return false;  // Memorial day
+          if ((month == 7) && (dayOfMonth == 4)) return false;   // Independance day
+          if ((month == 9) && (dayOfMonth == 1)) return false;   // Labor day
+          if ((month == 10) && (dayOfMonth == 13)) return false; // Columbus day
+          if ((month == 11) && (dayOfMonth == 11)) return false; // Veterans day
+          if ((month == 11) && (dayOfMonth == 27)) return false; // Thanksgiving
+          if ((month == 12) && (dayOfMonth == 25)) return false; // Christmas
+         
+          // Weekends
+          return ((dayOfWeek !== 0) && (dayOfWeek != 6));
+        }
+      });
+    });
+  </script>
+  <input type="text" name="datebox" id="datebox" value="2014-05-14"
+    data-dojo-type="dijit/form/DateTextBox"
+    required="true" />
+</body>
+</html>
